@@ -32,5 +32,9 @@ pip install -r requirements.txt
 
 5. Execute
 ```zsh
-scrapy crawl legal
+
+scrapy crawl legislation \                                                                                                                        
+-a name="<nome>.json" \ 
+-a url="https://www2.camara.leg.br/<pasta_para_a_lei>.html" \
+-a path="/pasta/para/salvar/o/json"
 ```
