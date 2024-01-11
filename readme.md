@@ -28,9 +28,7 @@ Windows:
 pip install -r requirements.txt
 ```
 
-4. Baixe as páginas html da legislação e coloque na pasta crowler/files/legal
-
-5. Execute
+4. Execute
 ```zsh
 
 scrapy crawl legislation \  
