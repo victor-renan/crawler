@@ -1,6 +1,6 @@
-# Crowler de Dados
+# Crawler de Dados
 
-Para executar este crowler, faça o seguinte:
+Para executar este crawler, faça o seguinte:
 
 1. Clone o repo e crie um ambiente virtual
 
