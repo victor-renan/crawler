@@ -9,3 +9,9 @@ def sanitize_array(arr):
     for text in arr:
         aux.append(sanitize(text))
     return aux
+
+def resume(text, size):
+    if len(text) <= size:
+        return text
+
+    return text[0:size-4] + "..."
