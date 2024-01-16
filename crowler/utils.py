@@ -2,7 +2,13 @@
 import re
 
 def sanitize(text):
-    return re.compile('<.*?>').sub('', text).strip()
+    return(
+        re.compile('<.*?>')
+        .sub('', text)
+        .replace('/r', '')
+        .replace('/n', '')
+        .strip()
+    )
 
 def sanitize_array(arr):
     aux = []

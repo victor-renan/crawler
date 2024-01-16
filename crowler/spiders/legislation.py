@@ -21,11 +21,11 @@ class LegislationSpider(scrapy.Spider):
                 "url": self.url,
                 "nome" : utils.sanitize(response.xpath("//div[@id='content']/h1").get()),
                 "data": utils.sanitize(response.xpath("//div[@id='content']/h1").get()).split(',')[1][4::].capitalize(),
-                "resumo": utils.resume(utils.sanitize(response.xpath("//p[@class='ementa']").get()), 52),
+                "resumo": utils.resume(utils.sanitize(response.xpath("//p[@class='ementa']").get())),
                 "paragrafos": utils.sanitize_array(response.xpath("//div[@class='texto']").get().split('<br><br>')),
                 "artigos": utils.sanitize_array(response.xpath("//div[@class='texto']").get().split('<br><br>')),
                 "conteudo": "Art" + utils.resume(utils.sanitize(response.xpath("//div[@class='texto']").get())
-                                                 .split("Art", 1)[1], 150).replace('\u00a0\u00a0\u00a0\u00a0\u00a0', ''),
+                                                 .split("Art", 1)[1], 200).replace('\u00a0\u00a0\u00a0\u00a0\u00a0', ''),
             }, fp)
 
             fp.close()
