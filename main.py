@@ -19,16 +19,17 @@ def build_requests() -> None:
         if bool(parsed_url):
             res = requests.get(parsed_url)
 
-            print(select_all(sanitize(res.text)).split("<br><br>")[0])
-            # legal_object = LegalObject(
-            #     url = parsed_url,
-            #     name = sanitize(parse_name(parsed_url)),
-            #     resumo = sanitize(select_first("<h1>.*</h1>", res.text)),
-            #     paragrafos = ["asdf"],
-            #     artigos = ["asdf"],
-            # )
+            print(sanitize_all(res.text.split("<BR><BR>")))
 
-            # print(legal_object.deserialize())
+            legal_object = LegalObject(
+                url = parsed_url,
+                name = sanitize(parse_name(parsed_url)),
+                resumo = sanitize(select_first("<h1>.*</h1>", res.text)),
+                paragrafos = ["asdf"],
+                artigos = ["asdf"],
+            )
+
+            print(legal_object.deserialize())
 
 
 build_requests()

@@ -9,7 +9,19 @@ def select_first(pattern: str, content: str) -> str:
     return results[0]
 
 def sanitize(content: str) -> str:
-    return re.sub(r"<.*?>", "", content).replace("\n", "")
+    return (
+        re.sub(r"<.*?>", "", content)
+        .replace("\n", "")
+        .replace("\r", "")
+        .replace("\t", "")
+        .strip()
+    )
+
+def sanitize_all(content: list) -> list:
+    aux = []
+    for item in content:
+        aux.append(sanitize(item))
+    return aux
 
 def select_all(pattern: str, content: str) -> list[str]:
     return re.findall(pattern, content)
