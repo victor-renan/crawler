@@ -8,7 +8,7 @@ def select_first(pattern: str, content: str) -> str:
     if len(results) == 0: return ""
     return results[0]
 
-def sanitize(content: str) -> str:
+def purify(content: str) -> str:
     return (
         re.sub(r"<.*?>", "", content)
         .replace("\n", "")
@@ -17,7 +17,7 @@ def sanitize(content: str) -> str:
         .strip()
     )
 
-def sanitize_all(content: list) -> list:
+def purify_all(content: list) -> list:
     aux = []
     for item in content:
         aux.append(sanitize(item))
@@ -28,3 +28,6 @@ def select_all(pattern: str, content: str) -> list[str]:
 
 def parse_name(url: str) -> str:
     return re.sub(r'[^a-zA-Z0-9]', '-', url.split("/")[-1].strip().split(".")[0])
+
+def make_file(name: str, ext: str) -> str:
+    return f"{name}.{ext}"

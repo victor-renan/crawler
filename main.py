@@ -7,29 +7,26 @@ import re
 
 
 def create_file(filename: str, content: LegalObject) -> None:
-    with open(path(OUT_DIR, filename), "w+") as fr:
-        fr.write(json.dumps(content))
+    with open(path.join(OUT_DIR, filename), "w+") as fr:
+        fr.write(content.deserialize())
         fr.close()
 
 def build_requests() -> None:
     for url in open(URLS_DIR).readlines():
-
         parsed_url = parse_url(url)
+        filename = purify(parse_name(parsed_url))
 
         if bool(parsed_url):
             res = requests.get(parsed_url)
-
-            print(sanitize_all(res.text.split("<BR><BR>")))
-
+            pattern = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
             legal_object = LegalObject(
                 url = parsed_url,
-                name = sanitize(parse_name(parsed_url)),
-                resumo = sanitize(select_first("<h1>.*</h1>", res.text)),
-                paragrafos = ["asdf"],
-                artigos = ["asdf"],
+                name = purify(select_first(r"<h1>.*</h1>", res.text)),
+                resumo = purify(select_first(r'<p class="ementa">.*</p>', res.text)),
+                artigos = ("Art. 1" + purify(res.text.split("Art. 1", 1)[-1])).split(pattern),
+                paragrafos = purify(res.text).split(pattern),
             )
 
-            print(legal_object.deserialize())
-
+            create_file(make_file(filename, "json"), legal_object)
 
 build_requests()

@@ -18,6 +18,6 @@ class LegalObject:
             "url": self.url,
             "name": self.name,
             "resumo": self.resumo,
-            "paragrafos": self.paragrafos,
             "artigos": self.artigos,
+            "paragrafos": self.paragrafos,
         })
