@@ -22,7 +22,7 @@ def build_requests() -> None:
             legal_object = LegalObject(
                 url = parsed_url,
                 name = purify(select_first(r"<h1>.*</h1>", res.text)),
-                resumo = purify(select_first(r'<p class="ementa">.*</p>', res.text)),
+                resumo = select_first(r'<p class="ementa">(.*?)</p>', purify(res.text, False)),
                 artigos = ("Art. 1" + purify(res.text.split("Art. 1", 1)[-1])).split(pattern),
                 paragrafos = purify(res.text).split(pattern),
             )

@@ -8,19 +8,23 @@ def select_first(pattern: str, content: str) -> str:
     if len(results) == 0: return ""
     return results[0]
 
-def purify(content: str) -> str:
+def purify(content: str, escape_html: bool = True) -> str:
+    purified = content
+
+    if (escape_html):
+        purified = re.sub(r"<.*?>", "", purified)
+
     return (
-        re.sub(r"<.*?>", "", content)
-        .replace("\n", "")
+        purified.replace("\n", "")
         .replace("\r", "")
         .replace("\t", "")
         .strip()
     )
 
-def purify_all(content: list) -> list:
+def purify_all(content: list, escape_html: bool = True) -> list:
     aux = []
     for item in content:
-        aux.append(sanitize(item))
+        aux.append(sanitize(item, escape_html))
     return aux
 
 def select_all(pattern: str, content: str) -> list[str]:
