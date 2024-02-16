@@ -35,3 +35,14 @@ def parse_name(url: str) -> str:
 
 def make_file(name: str, ext: str) -> str:
     return f"{name}.{ext}"
+
+def select_till(content: str, to: int):
+    if len(content) < to:
+        return content
+    return content[0:(to-3)]
+
+def convert_nbsp(content: list):
+    aux = []
+    for text in content:
+        aux.append(text.replace("&nbsp;", " ").strip())
+    return aux

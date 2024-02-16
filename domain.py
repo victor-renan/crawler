@@ -8,16 +8,18 @@ URLS_DIR = "./urls.txt"
 @dataclass
 class LegalObject:
     url: str
-    name: str
+    nome: str
     resumo: str
+    conteudo: str
     paragrafos: list[str]
     artigos: list[str]
     
     def deserialize(self) -> object:
         return json.dumps({
             "url": self.url,
-            "name": self.name,
+            "nome": self.nome,
             "resumo": self.resumo,
+            "conteudo": self.conteudo,
             "artigos": self.artigos,
             "paragrafos": self.paragrafos,
         })
