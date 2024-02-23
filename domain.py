@@ -3,7 +3,8 @@ import json
 
 
 OUT_DIR = "./out"
-URLS_DIR = "./urls.txt"
+CAMARA_URLS = "./in/camara.txt"
+SEGES_URLS = "./in/seges.txt"
 
 @dataclass
 class LegalObject:
@@ -12,7 +13,6 @@ class LegalObject:
     resumo: str
     conteudo: str
     paragrafos: list[str]
-    artigos: list[str]
     
     def deserialize(self) -> object:
         return json.dumps({
@@ -20,6 +20,5 @@ class LegalObject:
             "nome": self.nome,
             "resumo": self.resumo,
             "conteudo": self.conteudo,
-            "artigos": self.artigos,
             "paragrafos": self.paragrafos,
         })

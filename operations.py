@@ -1,4 +1,11 @@
+from domain import OUT_DIR, LegalObject
+from os import path
 import re
+
+def create_file(filename: str, content: LegalObject) -> None:
+    with open(path.join(OUT_DIR, filename), "w+") as fr:
+        fr.write(content.deserialize())
+        fr.close()
 
 def parse_url(content: str) -> str:
     return re.sub("\n", "", content).strip()
@@ -24,7 +31,7 @@ def purify(content: str, escape_html: bool = True) -> str:
 def purify_all(content: list, escape_html: bool = True) -> list:
     aux = []
     for item in content:
-        aux.append(sanitize(item, escape_html))
+        aux.append(purify(item, escape_html))
     return aux
 
 def select_all(pattern: str, content: str) -> list[str]:
@@ -39,7 +46,7 @@ def make_file(name: str, ext: str) -> str:
 def select_till(content: str, to: int):
     if len(content) < to:
         return content
-    return content[0:(to-3)]
+    return content[0:(to-3)] + "..."
 
 def convert_nbsp(content: list):
     aux = []
